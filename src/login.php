@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once 'validation.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ session_start();
     </div>
     <!-- login form -->
     <div class="m-auto text-center text-text-500 font-default">
-        <form method="post">
+        <form action="validation.php" method="post">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
             <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="username" name="username" required autofocus>
