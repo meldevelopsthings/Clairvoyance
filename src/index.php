@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
-    <title>homepage</title>
+    <title>Homepage</title>
 </head>
 <body>
     <div>
@@ -16,6 +16,5 @@
         <li class="float-left"><a class="block text-center px-16 py-14 hover:bg-inner-500" href="login.php">Login</a></li>
     </ul>
     </div>
-    
 </body>
 </html>
