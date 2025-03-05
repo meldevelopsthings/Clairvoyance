@@ -7,7 +7,6 @@ include_once 'validation.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
-    <script src="showPass.js"></script>
     <title>Login</title>
 </head>
 <body>
@@ -17,7 +16,7 @@ include_once 'validation.php';
     </div>
     <!-- login form -->
     <div class="m-auto text-center text-text-500 font-default">
-        <form action="validation.php" method="post">
+        <form id="loginForm" onsubmit="loginEvent(event)">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
             <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="username" name="username" required autofocus>
@@ -36,6 +35,9 @@ include_once 'validation.php';
           <div class="text-2xl">
             <h4>No account? Register <u><a href="registration.php">here</a></u></h4>
           </div>
+          <div id="message"></div>
     </div>
 </body>
+<script src="showPass.js"></script>
+<script src="loginForm.js"></script>
 </html>
