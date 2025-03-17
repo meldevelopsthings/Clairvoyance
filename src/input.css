@@ -7,13 +7,15 @@
 }
 
 @theme {
-   --color-bg-500: oklch(37.82% 0.0415 19.18);
+   --color-lighter-500: oklch(37.82% 0.0415 19.18);
    --color-inner-500: oklch(48.23% 0.0539 19.22);
-   --color-border-500: oklch(34.14% 0.0352 19.04);
+   --color-darker-500: oklch(34.14% 0.0352 19.04);
    --color-text-500: oklch(87.2% 0.0144 318.7);
+   --color-border-500: oklch(28.1% 0.0213 18.5);
    --font-default: "Ubuntu";
+   --breakpoint-navclose: 66rem;
 }
 
 body {
-    background-color: var(--color-bg-500);
+    background-color: var(--color-lighter-500);
 }
