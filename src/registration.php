@@ -1,3 +1,8 @@
+<?php
+$db = new SQLite3("./database.db");
+
+$connection = $db->query('SELECT * FROM userAccounts');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,35 +10,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
     <title>Login</title>
+    <script src="showPass.js"></script>
 </head>
 <body>
     <div class="my-30">
         <h1 class="text-text-500 text-6xl w-full lg:w-[65%] m-auto text-center font-default font-bold">Create an account</h1>
     </div>
     <div class="m-auto text-center text-text-500 font-default">
-        <form action="./index.html">
+        <form action="./index.php">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="username" name="username" required autofocus>
+            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="username" required autofocus>
             </div>
             <div class="">
                 <label class="text-2xl" for="fname">First Name:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="fname" name="fname" required autofocus>
+                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="fname" required>
             </div>
             <div class="py-8">
             <label class="text-2xl" for="password">Password:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="password" id="pass" name="password" required>
+            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="password" required><br>
             </div>
-            <div class="">
+            <div>
                 <label class="text-2xl" for="confirmPassword">Confirm Password:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="password" id="confPass" name="confirmPass" required>
+                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="confPass" required><br>
             </div>
             <div class="py-8">
             <input class="w-65 h-12 text-3xl font-bold bg-inner-500 border-solid border-3 rounded-3xl border-border-500" type="submit" value="Create Account">
             </div>
           </form> 
           <div class="text-2xl">
-            <h4>Already have an account? Login <u><a href="login.html">here</a></u></h4>
+            <h4>Already have an account? Login <u><a href="login.php">here</a></u></h4>
           </div>
     </div>
 </body>
