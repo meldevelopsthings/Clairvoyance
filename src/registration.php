@@ -20,25 +20,25 @@ $connection = $db->query('SELECT * FROM userAccounts');
         <form action="./index.php">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="username" required autofocus>
+            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="username" required autofocus>
             </div>
             <div class="">
                 <label class="text-2xl" for="fname">First Name:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="fname" required>
+                <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="fname" required>
             </div>
             <div class="py-8">
             <label class="text-2xl" for="password">Password:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="password" required><br>
+            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="password" required><br>
             </div>
             <div>
                 <label class="text-2xl" for="confirmPassword">Confirm Password:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-2xl border-border-500 w-100 h-8 text-center" type="text" id="confPass" required><br>
+                <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="confPass" required><br>
             </div>
             <div class="py-8">
-            <input class="w-65 h-12 text-3xl font-bold bg-inner-500 border-solid border-3 rounded-3xl border-border-500" type="submit" value="Create Account">
+            <input class="w-65 h-12 text-3xl font-bold bg-inner-500 border-solid border-3 rounded-full border-border-500" type="submit" value="Create Account">
             </div>
           </form> 
-          <div class="text-2xl">
+          <div class="text-2xl block">
             <h4>Already have an account? Login <u><a href="login.php">here</a></u></h4>
           </div>
     </div>

@@ -531,29 +531,17 @@
   .collapse {
     visibility: collapse;
   }
-  .absolute {
-    position: absolute;
-  }
   .fixed {
     position: fixed;
   }
   .relative {
     position: relative;
   }
-  .top-1 {
-    top: calc(var(--spacing) * 1);
+  .top-0 {
+    top: calc(var(--spacing) * 0);
   }
-  .top-2 {
-    top: calc(var(--spacing) * 2);
-  }
-  .right-2 {
-    right: calc(var(--spacing) * 2);
-  }
-  .left-2 {
-    left: calc(var(--spacing) * 2);
-  }
-  .left-\[calc\(20\%-1rem\)\] {
-    left: calc(20% - 1rem);
+  .right-0 {
+    right: calc(var(--spacing) * 0);
   }
   .z-50 {
     z-index: 50;
@@ -569,6 +557,9 @@
   }
   .my-30 {
     margin-block: calc(var(--spacing) * 30);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
@@ -612,12 +603,6 @@
   .w-full {
     width: 100%;
   }
-  .min-w-1 {
-    min-width: calc(var(--spacing) * 1);
-  }
-  .min-w-1\/5 {
-    min-width: calc(1/5 * 100%);
-  }
   .flex-1 {
     flex: 1;
   }
@@ -629,10 +614,6 @@
   }
   .-translate-x-full {
     --tw-translate-x: -100%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-0 {
-    --tw-translate-x: calc(var(--spacing) * 0);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
@@ -647,12 +628,6 @@
   .flex-col {
     flex-direction: column;
   }
-  .flex-nowrap {
-    flex-wrap: nowrap;
-  }
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
   .items-center {
     align-items: center;
   }
@@ -665,11 +640,8 @@
   .overflow-hidden {
     overflow: hidden;
   }
-  .rounded-2xl {
-    border-radius: var(--radius-2xl);
-  }
-  .rounded-3xl {
-    border-radius: var(--radius-3xl);
+  .rounded-\[15px\] {
+    border-radius: 15px;
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -715,6 +687,9 @@
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -788,9 +763,33 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
+  }
+  .duration-400 {
+    --tw-duration: 400ms;
+    transition-duration: 400ms;
+  }
+  .duration-600 {
+    --tw-duration: 600ms;
+    transition-duration: 600ms;
+  }
+  .duration-700 {
+    --tw-duration: 700ms;
+    transition-duration: 700ms;
+  }
+  .duration-900 {
+    --tw-duration: 900ms;
+    transition-duration: 900ms;
+  }
+  .duration-90000 {
+    --tw-duration: 90000ms;
+    transition-duration: 90000ms;
   }
   .hover\:bg-inner-500 {
     &:hover {
@@ -804,16 +803,6 @@
       background-color: var(--color-inner-500);
     }
   }
-  .md\:hidden {
-    @media (width >= 48rem) {
-      display: none;
-    }
-  }
-  .md\:w-1\/5 {
-    @media (width >= 48rem) {
-      width: calc(1/5 * 100%);
-    }
-  }
   .lg\:w-\[65\%\] {
     @media (width >= 64rem) {
       width: 65%;
@@ -822,6 +811,11 @@
   .navclose\:hidden {
     @media (width >= 66rem) {
       display: none;
+    }
+  }
+  .navclose\:w-1\/5 {
+    @media (width >= 66rem) {
+      width: calc(1/5 * 100%);
     }
   }
   .navclose\:translate-x-0 {

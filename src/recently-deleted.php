@@ -7,7 +7,7 @@ include_once 'validation.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
-    <title>All Teams</title>
+    <title>Recently Deleted</title>
 </head>
 <!-- Menu button to toggle siderbar, only for smaller views -->
 <button id="navbar-toggle" class="navclose:hidden fixed top-0 right-0 p-3 text-3xl text-text-500 bg-darker-500 rounded-[15px] z-50 transition-all duration-700">
@@ -58,7 +58,7 @@ include_once 'validation.php';
     </div>
 </body>
 <div class="flex-1 p-4 flex flex-col justify-center items-center ml-">
-        <h1 class="text-text-500 text-5xl">All Teams</h1>
+        <h1 class="text-text-500 text-5xl">Recently Deleted</h1>
 </div>
 <script src="navbar.js"></script>
 </html>

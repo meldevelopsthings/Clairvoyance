@@ -7,14 +7,15 @@ include_once 'validation.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
-    <title>All Boards</title>
+    <title>Recently Closed</title>
 </head>
-<button id="navbar-toggle" class="navclose:hidden fixed top-1 left-2 p-2 text-3xl text-text-500 z-50 transition-all duration-300">
+<!-- Menu button to toggle siderbar, only for smaller views -->
+<button id="navbar-toggle" class="navclose:hidden fixed top-0 right-0 p-3 text-3xl text-text-500 bg-darker-500 rounded-[15px] z-50 transition-all duration-700">
         <img src="./img/menu.svg">
     </button>
 <body class="flex">
 <!-- Sidebar code, allows user to navigate the site -->
-        <nav id="navbar" class="text-text-500 text-xl bg-darker-500 list-none m-0 p-0 md:w-1/5 min-w-1/5 w-full h-screen fixed overflow-auto border-r-3 border-border-500 flex flex-col transition-transform duration-300 navclose:translate-x-0 -translate-x-full">
+        <nav id="navbar" class="text-text-500 text-xl bg-darker-500 list-none m-0 p-0 navclose:w-1/5 w-full h-screen fixed overflow-auto border-r-3 border-border-500 flex flex-col transition-transform duration-700 navclose:translate-x-0 -translate-x-full">
         <div class="flex-grow">
         <a href="user-settings.php">
             <li class="flex items-center p-2 border-b-3 border-border-500">
@@ -55,10 +56,9 @@ include_once 'validation.php';
         </a>
         </nav>    
     </div>
-<!-- Main content -->
-    <div class="flex-1 ml-1/5 p-4 flex justify-center items-center">
-        <h1 class="text-text-500 text-5xl">All Boards</h1>
-    </div>
 </body>
+<div class="flex-1 p-4 flex flex-col justify-center items-center ml-">
+        <h1 class="text-text-500 text-5xl">Recently Closed</h1>
+</div>
 <script src="navbar.js"></script>
 </html>
