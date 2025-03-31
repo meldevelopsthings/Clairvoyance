@@ -14,6 +14,8 @@
    --color-border-500: oklch(28.1% 0.0213 18.5);
    --font-default: "Ubuntu";
    --breakpoint-navclose: 66rem;
+   --drop-shadow-outer: 4 0px 4px rgba(0, 0, 0, 0.25);
+   --inset-shadow-inner: inset 4 0px 0px rgba(0, 0, 0, 0.25);
 }
 
 body {
