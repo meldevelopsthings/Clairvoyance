@@ -13,7 +13,7 @@ include_once 'validation.php';
 <button id="navbar-toggle" class="navclose:hidden fixed top-0 right-0 p-3 text-3xl text-text-500 bg-darker-500 rounded-[15px] z-50 transition-all duration-700">
         <img src="./img/menu.svg">
     </button>
-<body class="flex">
+<body class="">
 <!-- Sidebar code, allows user to navigate the site -->
         <nav id="navbar" class="text-text-500 text-xl bg-darker-500 list-none m-0 p-0 navclose:w-1/5 w-full h-screen fixed overflow-auto border-r-3 border-border-500 flex flex-col transition-transform duration-700 navclose:translate-x-0 -translate-x-full">
         <div class="flex-grow">
@@ -48,7 +48,7 @@ include_once 'validation.php';
             </li>
         </a>
         </div>
-        <a href="login.php">
+        <a href="index.php">
             <li class="flex items-center p-2 border-t-3 border-border-500 w-full">
                 <img src="./img/logout.svg" class="mr-2">
                 <p class="text-nowrap">Logout</p>
@@ -56,12 +56,32 @@ include_once 'validation.php';
         </a>
         </nav>    
     </div>
-</body>
-<!-- Main content -->
-    <div class="flex-1 p-4 flex flex-col justify-center items-center ml-">
+    <!-- Main Content, should be dynamically updated based on user's boards, especially after they have created a new one -->
+    <button type="button" class=" bg-darker-500 text-text-500 rounded-full drop-shadow-outer inset-shadow-inner p-2 fixed right-0 mt-8 mr-10">
+            <p class="inline-block text-nowrap align-middle mr-1">Create New</p>
+            <img src="./img/new.svg" class="inline-block align-middle">
+        </button>
+    <main class="navclose:pl-[22%] text-center p-8">
         <h1 class="text-text-500 text-5xl">All Boards</h1>
-        <p class="text-text-500 text-4xl mt-4">hi</p>
-    </div>
-
+        <div class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <p>type here</p>
+        </div>
+        <div class="w-full mt-5 p-4 text-2xl text-text-500  grid grid-cols-3">
+            <p>Name</p>
+            <p>Last Closed</p>
+            <p>Date Created</p>
+        </div>
+        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <p>uni</p>
+            <p>13:51 01/04/2025</p>
+            <p>15:00 16/09/2024</p>
+        </div>
+        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <p>group work</p>
+            <p>09:45 30/03/2025</p>
+            <p>12:00 22/01/2025</p>
+        </div>
+    </main>
+</body>
 <script src="navbar.js"></script>
 </html>

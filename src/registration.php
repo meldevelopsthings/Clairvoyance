@@ -39,7 +39,7 @@ $connection = $db->query('SELECT * FROM userAccounts');
             </div>
           </form> 
           <div class="text-2xl block">
-            <h4>Already have an account? Login <u><a href="login.php">here</a></u></h4>
+            <h4>Already have an account? Login <u><a href="index.php">here</a></u></h4>
           </div>
     </div>
 </body>

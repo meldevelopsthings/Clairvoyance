@@ -12,7 +12,7 @@ function loginEvent(event) {
         document.getElementById("message").innerHTML = data;
         
         if (data === "success") {
-            window.location.href = 'index.php';
+            window.location.href = 'boards.php';
         }
     })
     .catch(error => {

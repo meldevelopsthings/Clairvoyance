@@ -48,7 +48,7 @@ include_once 'validation.php';
             </li>
         </a>
         </div>
-        <a href="login.php">
+        <a href="index.php">
             <li class="flex items-center p-2 border-t-3 border-border-500 w-full">
                 <img src="./img/logout.svg" class="mr-2">
                 <p class="text-nowrap">Logout</p>
@@ -56,13 +56,23 @@ include_once 'validation.php';
         </a>
         </nav>    
     </div>
-    <!-- Main Content -->
-    <main class="navclose:pl-[21%] text-center p-4">
+    <!-- Main Content, should be dynamically updated based on user's recently closed boards -->
+    <main class="navclose:pl-[22%] text-center p-8">
         <h1 class="text-text-500 text-5xl">Recently Closed</h1>
-        <div class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer">
+        <div class="w-full mt-10 p-4 text-2xl text-text-500  grid grid-cols-3">
             <p>Name</p>
-            <p>Last Modified</p>
+            <p>Last Closed</p>
             <p>Date Created</p>
+        </div>
+        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <p>uni</p>
+            <p>13:51 01/04/2025</p>
+            <p>15:00 16/09/2024</p>
+        </div>
+        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <p>group work</p>
+            <p>09:45 30/03/2025</p>
+            <p>12:00 22/01/2025</p>
         </div>
     </main>
 </body>
