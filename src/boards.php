@@ -57,14 +57,21 @@ include_once 'validation.php';
         </nav>    
     </div>
     <!-- Main Content, should be dynamically updated based on user's boards, especially after they have created a new one -->
-    <button type="button" class=" bg-darker-500 text-text-500 rounded-full drop-shadow-outer inset-shadow-inner p-2 fixed right-0 mt-8 mr-10">
-            <p class="inline-block text-nowrap align-middle mr-1">Create New</p>
-            <img src="./img/new.svg" class="inline-block align-middle">
-        </button>
+
     <main class="navclose:pl-[22%] text-center p-8">
         <h1 class="text-text-500 text-5xl">All Boards</h1>
         <div class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
-            <p>type here</p>
+            <p class="bg-lighter-500 rounded-full">Type Name Here</p>
+            <select id="template" name="template" class="bg-lighter-500 border-border-500 text-center min-w-fit rounded-full">
+                <option value="template">Select Template</option>
+                <option value="default">Default</option>
+                <option value="todo">To-do</option>
+                <option value="code">Code</option>    
+            </select>
+            <button type="button" class=" bg-darker-500 text-text-500 rounded-full right-4">
+            <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
+            <img src="./img/new.svg" class="inline-block align-middle">
+        </button>
         </div>
         <div class="w-full mt-5 p-4 text-2xl text-text-500  grid grid-cols-3">
             <p>Name</p>
