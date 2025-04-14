@@ -19,17 +19,17 @@ include_once 'validation.php';
         <form id="loginForm" onsubmit="loginEvent(event)">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="username" name="username" required autofocus>
+            <input class="bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="text" id="username" name="username" required autofocus>
             </div>
             <div>
             <label class="text-2xl" for="password">Password:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="password" id="password" name="password"required>
+            <input class="bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="password" id="password" name="password"required>
             </div>
             <div>
                 <input type="checkbox" onclick="showPass()"> Show Password
             </div>
             <div class="py-8">
-            <input class="w-30 h-12 text-3xl font-bold bg-inner-500 border-solid rounded-full border-3 border-border-500" type="submit" value="Login">
+            <input class="w-30 h-12 text-3xl font-bold bg-inner-500 rounded-full drop-shadow-outer insert-shadow-outer" type="submit" value="Login">
             </div>
           </form> 
           <div class="text-2xl">

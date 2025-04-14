@@ -20,22 +20,22 @@ $connection = $db->query('SELECT * FROM userAccounts');
         <form action="./index.php">
             <div class="py-8">
             <label class="text-2xl" for="username">Username:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="username" required autofocus>
+            <input class="bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="text" id="username" required autofocus>
             </div>
             <div class="">
                 <label class="text-2xl" for="fname">First Name:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="fname" required>
+                <input class="bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="text" id="fname" required>
             </div>
             <div class="py-8">
             <label class="text-2xl" for="password">Password:</label><br>
-            <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="password" required><br>
+            <input class="bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="text" id="password" required><br>
             </div>
             <div>
                 <label class="text-2xl" for="confirmPassword">Confirm Password:</label><br>
-                <input class="bg-inner-500 border-solid border-3 rounded-full border-border-500 w-100 h-8 text-center" type="text" id="confPass" required><br>
+                <input class="bg-inner-500 rounded-full q-100 h-8 text-center drop-shadow-outer insert-shadow-outer" type="text" id="confPass" required><br>
             </div>
             <div class="py-8">
-            <input class="w-65 h-12 text-3xl font-bold bg-inner-500 border-solid border-3 rounded-full border-border-500" type="submit" value="Create Account">
+            <input class="w-65 h-12 text-3xl font-bold bg-inner-500 rounded-full drop-shadow-outer insert-shadow-outer" type="submit" value="Create Account">
             </div>
           </form> 
           <div class="text-2xl block">
