@@ -2,12 +2,7 @@ let usernames = [];
 
 function addUsername() {
     const inputField = document.getElementById("teamInvites");
-    const teamName = document.getElementById("teamName");
     const username = inputField.value.trim();
-
-    if (teamName) {
-        
-    }
 
     if (username) {
         usernames.push(username);
@@ -15,6 +10,21 @@ function addUsername() {
     } else {
         alert("Please enter a username.")
     }
+}
+
+function submitUsername() {
+    if (usernames.length == 0) {
+        alert ("No usernames to submit.");
+        return;
+    }
+
+    fetch("teamsLogicPhp.php", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ usernames: usernames })
+    })
 }
 
 // document.getElementById('submitButton').addEventListener("click", addUsername);
