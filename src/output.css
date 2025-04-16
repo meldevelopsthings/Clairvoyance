@@ -1,4 +1,4 @@
-/*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.1.4 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
@@ -178,14 +178,11 @@
   }
 }
 @layer utilities {
+  .absolute {
+    position: absolute;
+  }
   .fixed {
     position: fixed;
-  }
-  .relative {
-    position: relative;
-  }
-  .sticky {
-    position: sticky;
   }
   .top-0 {
     top: calc(var(--spacing) * 0);
@@ -205,6 +202,21 @@
   .m-auto {
     margin: auto;
   }
+  .mx-20 {
+    margin-inline: calc(var(--spacing) * 20);
+  }
+  .mx-100 {
+    margin-inline: calc(var(--spacing) * 100);
+  }
+  .mx-105 {
+    margin-inline: calc(var(--spacing) * 105);
+  }
+  .mx-110 {
+    margin-inline: calc(var(--spacing) * 110);
+  }
+  .mx-130 {
+    margin-inline: calc(var(--spacing) * 130);
+  }
   .my-5 {
     margin-block: calc(var(--spacing) * 5);
   }
@@ -216,6 +228,24 @@
   }
   .my-30 {
     margin-block: calc(var(--spacing) * 30);
+  }
+  .my-100 {
+    margin-block: calc(var(--spacing) * 100);
+  }
+  .my-120 {
+    margin-block: calc(var(--spacing) * 120);
+  }
+  .my-121 {
+    margin-block: calc(var(--spacing) * 121);
+  }
+  .my-130 {
+    margin-block: calc(var(--spacing) * 130);
+  }
+  .my-150 {
+    margin-block: calc(var(--spacing) * 150);
+  }
+  .my-160 {
+    margin-block: calc(var(--spacing) * 160);
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
@@ -232,23 +262,11 @@
   .flex {
     display: flex;
   }
-  .flow-root {
-    display: flow-root;
-  }
   .grid {
     display: grid;
   }
-  .hidden {
-    display: none;
-  }
-  .inline {
-    display: inline;
-  }
   .inline-block {
     display: inline-block;
-  }
-  .inline-flex {
-    display: inline-flex;
   }
   .table {
     display: table;
@@ -258,9 +276,6 @@
   }
   .h-12 {
     height: calc(var(--spacing) * 12);
-  }
-  .h-fit {
-    height: fit-content;
   }
   .h-screen {
     height: 100vh;
@@ -273,9 +288,6 @@
   }
   .w-100 {
     width: calc(var(--spacing) * 100);
-  }
-  .w-200 {
-    width: calc(var(--spacing) * 200);
   }
   .w-fit {
     width: fit-content;
@@ -308,18 +320,8 @@
   .flex-col {
     flex-direction: column;
   }
-  .content-start {
-    align-content: flex-start;
-  }
   .items-center {
     align-items: center;
-  }
-  .space-x-2 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
-    }
   }
   .overflow-auto {
     overflow: auto;
@@ -334,10 +336,6 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .border-3 {
-    border-style: var(--tw-border-style);
-    border-width: 3px;
-  }
   .border-t-3 {
     border-top-style: var(--tw-border-style);
     border-top-width: 3px;
@@ -349,10 +347,6 @@
   .border-b-3 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 3px;
-  }
-  .border-solid {
-    --tw-border-style: solid;
-    border-style: solid;
   }
   .border-border-500 {
     border-color: var(--color-border-500);
@@ -517,11 +511,6 @@ body {
   inherits: false;
   initial-value: 0;
 }
-@property --tw-space-x-reverse {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -664,7 +653,6 @@ body {
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
-      --tw-space-x-reverse: 0;
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;

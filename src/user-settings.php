@@ -59,7 +59,7 @@ include_once 'userSettingsLogic.php';
     <!-- Main Content, should display settings that user can edit (main options ((for now)) should include editing username, editing password, editing fname and deleting their account) -->
     <main class="navclose:pl-[22%] text-text-500 text-center p-8">
         <h1 class="text-5xl">User Settings</h1>
-        <form action="" method="POST" class="my-10">
+        <form method="POST" class="my-10">
         <label class="flex text-xl">Change Username:</label>
         <input class="flex bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" id="changeUsername" name="changeUsername"><br>
         <label class="flex text-xl">Change Password:</label>

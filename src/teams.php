@@ -1,5 +1,5 @@
 <?php
-include_once 'validation.php';
+include_once 'teamsLogicPhp.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +59,15 @@ include_once 'validation.php';
     <!-- Main Content, should be dynamically updated based on user's teams that they are a part of -->
     <main class="navclose:pl-[22%] text-center p-8">
         <h1 class="text-text-500 text-5xl">All Teams</h1>
-        <div class="w-full mt-10 p-4 text-2xl text-text-500  grid grid-cols-3">
+        <form method="POST" class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamName">
+            <input placeholder="Enter usernames to invite" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamInvites"> 
+            <button type="submit" class=" bg-darker-500 text-text-500 rounded-full right-4">
+            <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
+            <img src="./img/new.svg" class="inline-block align-middle">
+        </button>
+        </form>
+        <div class="w-full mt-5 p-4 text-2xl text-text-500  grid grid-cols-3">
             <p>Name</p>
             <p>Last Closed</p>
             <p>Date Created</p>
@@ -77,4 +85,5 @@ include_once 'validation.php';
     </main>
 </body>
 <script src="navbar.js"></script>
+<script src="teamsLogic.js"></script>
 </html>

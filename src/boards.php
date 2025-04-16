@@ -59,7 +59,7 @@ include_once 'validation.php';
     <!-- Main Content, should be dynamically updated based on user's boards, especially after they have created a new one -->
     <main class="navclose:pl-[22%] text-center p-8">
         <h1 class="text-text-500 text-5xl">All Boards</h1>
-        <div class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+        <form class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500">
             <select id="template" name="template" class="bg-lighter-500 border-border-500 text-center min-w-fit rounded-full">
                 <option value="template">Select Template</option>
@@ -71,7 +71,7 @@ include_once 'validation.php';
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>
-        </div>
+        </form>
         <div class="w-full mt-5 p-4 text-2xl text-text-500 grid grid-cols-3">
             <p>Name</p>
             <p>Last Closed</p>
