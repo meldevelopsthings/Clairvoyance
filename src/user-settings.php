@@ -1,5 +1,11 @@
 <?php
 include_once 'userSettingsLogic.php';
+
+// Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
+if (!$_SESSION["userID"]){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

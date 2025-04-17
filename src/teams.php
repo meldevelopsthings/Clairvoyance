@@ -1,5 +1,11 @@
 <?php
 include_once 'teamsLogicPhp.php';
+
+// Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
+if (!$_SESSION["userID"]){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,27 +63,31 @@ include_once 'teamsLogicPhp.php';
         </nav>    
     </div>
     <!-- Main Content, should be dynamically updated based on user's teams that they are a part of -->
-    <main class="navclose:pl-[22%] text-center p-8">
-        <h1 class="text-text-500 text-5xl">All Teams</h1>
-        <form method="POST" class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
-            <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamName">
-            <input placeholder="Enter usernames to invite" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamInvites"> 
-            <button type="submit" class=" bg-darker-500 text-text-500 rounded-full right-4">
+    <main class="navclose:pl-[22%] text-text-500 text-center p-8">
+        <h1 class="text-5xl">All Teams</h1>
+        <form method="POST" class="w-full mt-10 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+            <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" type="text" id="teamName" name="teamName">
+            <input placeholder="Click here to invite members" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamUsernames" name="teamUsernames" onfocus="usernameSearchOpen()"> 
+            <button type="submit" class=" bg-darker-500 rounded-full right-4">
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>
         </form>
-        <div class="w-full mt-5 p-4 text-2xl text-text-500  grid grid-cols-3">
+        <!-- Popup for searching and adding usernames to a team -->
+        <div class="bg-darker-500 mt-2 rounded-2xl w-130 h-50 hidden drop-shadow-outer inset-shadow-inner" id="searchPopup">
+            <p></p>
+        </div>
+        <div class="w-full mt-5 p-4 text-2xl grid grid-cols-3">
             <p>Name</p>
             <p>Last Closed</p>
             <p>Date Created</p>
         </div>
-        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+        <div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <p>uni</p>
             <p>13:51 01/04/2025</p>
             <p>15:00 16/09/2024</p>
         </div>
-        <div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+        <div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <p>group work</p>
             <p>09:45 30/03/2025</p>
             <p>12:00 22/01/2025</p>

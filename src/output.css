@@ -19,6 +19,9 @@
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
     --font-weight-bold: 700;
+    --radius-md: 0.375rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -184,6 +187,12 @@
   .fixed {
     position: fixed;
   }
+  .relative {
+    position: relative;
+  }
+  .sticky {
+    position: sticky;
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -192,6 +201,15 @@
   }
   .right-4 {
     right: calc(var(--spacing) * 4);
+  }
+  .z-1 {
+    z-index: 1;
+  }
+  .z-10 {
+    z-index: 10;
+  }
+  .z-20 {
+    z-index: 20;
   }
   .z-50 {
     z-index: 50;
@@ -202,20 +220,8 @@
   .m-auto {
     margin: auto;
   }
-  .mx-20 {
-    margin-inline: calc(var(--spacing) * 20);
-  }
-  .mx-100 {
-    margin-inline: calc(var(--spacing) * 100);
-  }
-  .mx-105 {
-    margin-inline: calc(var(--spacing) * 105);
-  }
-  .mx-110 {
-    margin-inline: calc(var(--spacing) * 110);
-  }
-  .mx-130 {
-    margin-inline: calc(var(--spacing) * 130);
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
   }
   .my-5 {
     margin-block: calc(var(--spacing) * 5);
@@ -229,23 +235,11 @@
   .my-30 {
     margin-block: calc(var(--spacing) * 30);
   }
-  .my-100 {
-    margin-block: calc(var(--spacing) * 100);
-  }
-  .my-120 {
-    margin-block: calc(var(--spacing) * 120);
-  }
-  .my-121 {
-    margin-block: calc(var(--spacing) * 121);
-  }
-  .my-130 {
-    margin-block: calc(var(--spacing) * 130);
-  }
-  .my-150 {
-    margin-block: calc(var(--spacing) * 150);
-  }
   .my-160 {
     margin-block: calc(var(--spacing) * 160);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
@@ -265,6 +259,12 @@
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
+  .inline {
+    display: inline;
+  }
   .inline-block {
     display: inline-block;
   }
@@ -277,8 +277,29 @@
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
+  .h-50 {
+    height: calc(var(--spacing) * 50);
+  }
+  .h-100 {
+    height: calc(var(--spacing) * 100);
+  }
+  .h-220 {
+    height: calc(var(--spacing) * 220);
+  }
+  .h-fit {
+    height: fit-content;
+  }
   .h-screen {
     height: 100vh;
+  }
+  .w-1 {
+    width: calc(var(--spacing) * 1);
+  }
+  .w-1\/2 {
+    width: calc(1/2 * 100%);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
   }
   .w-30 {
     width: calc(var(--spacing) * 30);
@@ -289,11 +310,29 @@
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
+  .w-125 {
+    width: calc(var(--spacing) * 125);
+  }
+  .w-130 {
+    width: calc(var(--spacing) * 130);
+  }
+  .w-150 {
+    width: calc(var(--spacing) * 150);
+  }
+  .w-200 {
+    width: calc(var(--spacing) * 200);
+  }
   .w-fit {
     width: fit-content;
   }
   .w-full {
     width: 100%;
+  }
+  .max-w-200 {
+    max-width: calc(var(--spacing) * 200);
+  }
+  .max-w-500 {
+    max-width: calc(var(--spacing) * 500);
   }
   .min-w-fit {
     min-width: fit-content;
@@ -314,23 +353,50 @@
   .list-none {
     list-style-type: none;
   }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
   }
+  .content-center {
+    align-content: center;
+  }
   .items-center {
     align-items: center;
   }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .place-self-center {
+    place-self: center;
+  }
+  .self-center {
+    align-self: center;
+  }
+  .justify-self-center {
+    justify-self: center;
+  }
   .overflow-auto {
     overflow: auto;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
   }
   .rounded-\[15px\] {
     border-radius: 15px;
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
   }
   .border {
     border-style: var(--tw-border-style);
@@ -360,6 +426,9 @@
   .bg-lighter-500 {
     background-color: var(--color-lighter-500);
   }
+  .object-center {
+    object-position: center;
+  }
   .p-0 {
     padding: calc(var(--spacing) * 0);
   }
@@ -374,6 +443,9 @@
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
   }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
