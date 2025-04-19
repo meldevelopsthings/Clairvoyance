@@ -1,5 +1,6 @@
 <?php
 include_once 'boardsLogic.php';
+include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
 if (!$_SESSION["userID"]){
@@ -88,10 +89,12 @@ if (!$_SESSION["userID"]){
         <?php
             if ($boards) {
                 foreach ($boards as $row) {
+                    echo '<a href="usingBoard.php">';
                     echo '<div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner">';
                     echo '<p>' . $row["boardName"] . '</p>';
                     echo '<p>' . $row["creationDate"] . '</p>';
                     echo '</div>';
+                    echo '</a>';
                 }
             } else {
                 echo "something went wrong";

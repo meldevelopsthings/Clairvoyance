@@ -1,5 +1,6 @@
 <?php
 include_once 'teamsLogicPhp.php';
+include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
 if (!$_SESSION["userID"]){
@@ -82,16 +83,18 @@ if (!$_SESSION["userID"]){
             <p>Last Closed</p>
             <p>Date Created</p>
         </div>
-        <div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
-            <p>uni</p>
-            <p>13:51 01/04/2025</p>
-            <p>15:00 16/09/2024</p>
-        </div>
-        <div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
-            <p>group work</p>
-            <p>09:45 30/03/2025</p>
-            <p>12:00 22/01/2025</p>
-        </div>
+        <?php
+            if ($teams) {
+                foreach ($teams as $row) {
+                    echo '<div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner">';
+                    echo '<p>' . $row["teamName"] . '</p>';
+                    echo '<p>' . $row["creationDate"] . '</p>';
+                    echo '</div>';
+                }
+            } else {
+                echo "something went wrong";
+            }
+        ?>
     </main>
 </body>
 <script src="navbar.js"></script>

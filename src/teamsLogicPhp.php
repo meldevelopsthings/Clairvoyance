@@ -1,4 +1,5 @@
 <?php
+session_start();
 $db = new SQLite3("database.db");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

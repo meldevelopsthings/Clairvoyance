@@ -31,14 +31,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-
-// Gets all boards belonging to the currently authenticated user
-$stmt = $db->prepare("SELECT * FROM boards WHERE boardID IN (SELECT boardID FROM boardAuth WHERE userID = :userID)");
-$stmt->bindValue(":userID", $currentUserID, SQLITE3_TEXT);
-$result = $stmt->execute();
-$boards = [];
-
-while ($board = $result->fetchArray(SQLITE3_ASSOC)) {
-    $boards[] = $board;
-}
 ?>

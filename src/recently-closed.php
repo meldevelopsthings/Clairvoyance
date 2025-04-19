@@ -1,5 +1,5 @@
 <?php
-include_once 'validation.php';
+include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
 if (!$_SESSION["userID"]){
