@@ -86,13 +86,13 @@ if (!$_SESSION["userID"]){
         <?php
             if ($teams) {
                 foreach ($teams as $row) {
-                    echo '<div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner">';
+                    echo '<div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner">';
                     echo '<p>' . $row["teamName"] . '</p>';
                     echo '<p>' . $row["creationDate"] . '</p>';
                     echo '</div>';
                 }
             } else {
-                echo "something went wrong";
+                echo '<p class="mt-10 text-3xl"> You are currently not a member of a team. </p>';
             }
         ?>
     </main>

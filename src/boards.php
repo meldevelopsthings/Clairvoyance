@@ -1,5 +1,5 @@
 <?php
-include_once 'boardsLogic.php';
+include_once 'boardsLogicPhp.php';
 include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
@@ -64,9 +64,9 @@ if (!$_SESSION["userID"]){
         </nav>    
     </div>
     <!-- Headers and also where the user can create new boards using the input forms -->
-    <main class="navclose:pl-[22%] text-center p-8">
-        <h1 class="text-text-500 text-5xl">All Boards</h1>
-        <form method="POST" class="w-full mt-10 p-4 text-text-500 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
+    <main class="navclose:pl-[22%] text-text-500 text-center p-8">
+        <h1 class="text-5xl">All Boards</h1>
+        <form method="POST" class="w-full mt-10 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" type="text" name="boardName">
             <select id="template" name="template" class="bg-lighter-500 border-border-500 text-center min-w-fit rounded-full">
                 <option value="template">Select Template</option>
@@ -74,14 +74,14 @@ if (!$_SESSION["userID"]){
                 <option value="todo">To-do</option>
                 <option value="code">Code</option>    
             </select>
-            <button type="submit" class=" bg-darker-500 text-text-500 rounded-full right-4">
+            <button type="submit" class=" bg-darker-500 rounded-full right-4">
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>
         </form>
 
     <!-- Dynamic board display, based on what the user actually has access to -->
-        <div class="w-full mt-5 p-4 text-2xl text-text-500 grid grid-cols-3">
+        <div class="w-full mt-5 p-4 text-2xl grid grid-cols-3">
             <p>Name</p>
             <p>Last Closed</p>
             <p>Date Created</p>
@@ -89,15 +89,15 @@ if (!$_SESSION["userID"]){
         <?php
             if ($boards) {
                 foreach ($boards as $row) {
-                    echo '<a href="usingBoard.php">';
-                    echo '<div class="w-full mt-5 p-4 text-text-500 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner">';
+                    echo '<a href="usingBoard.php?boardID='.$row["boardID"].'">';
+                    echo '<div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner" id="clickedBoard">';
                     echo '<p>' . $row["boardName"] . '</p>';
                     echo '<p>' . $row["creationDate"] . '</p>';
                     echo '</div>';
                     echo '</a>';
                 }
             } else {
-                echo "something went wrong";
+                echo '<p class="mt-10 text-3xl"> You have no boards currently. </p>';
             }
         ?>
     </main>
