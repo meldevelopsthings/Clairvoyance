@@ -1,11 +1,19 @@
 <?php
 include_once 'boardsLogicPhp.php';
-include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
 if (!$_SESSION["userID"]){
     header("Location: index.php");
     die();
+}
+
+// Gets all boards belonging to the currently authenticated user
+$stmt = $db->prepare("SELECT * FROM boards WHERE boardID IN (SELECT boardID FROM boardAuth WHERE userID = :userID)");
+$stmt->bindValue(":userID", $currentUserID, SQLITE3_TEXT);
+$result = $stmt->execute();
+
+while ($board = $result->fetchArray(SQLITE3_ASSOC)) {
+    $boards[] = $board;
 }
 ?>
 <!DOCTYPE html>

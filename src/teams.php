@@ -1,11 +1,21 @@
 <?php
 include_once 'teamsLogicPhp.php';
-include_once 'menuRetrieve.php';
 
 // Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
 if (!$_SESSION["userID"]){
     header("Location: index.php");
     die();
+}
+
+$currentUserID = $_SESSION["userID"];
+
+// Gets all teams that the currently authenticated user is a part of.
+$stmt = $db->prepare("SELECT * FROM teams WHERE teamID IN (SELECT teamID FROM teamMemberAuth WHERE userID = :userID)");
+$stmt->bindValue(":userID", $currentUserID, SQLITE3_TEXT);
+$result = $stmt->execute();
+
+while ($team = $result->fetchArray(SQLITE3_ASSOC)) {
+    $teams[] = $team;
 }
 ?>
 <!DOCTYPE html>
@@ -69,14 +79,20 @@ if (!$_SESSION["userID"]){
         <form method="POST" class="w-full mt-10 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" type="text" id="teamName" name="teamName">
             <input placeholder="Click here to invite members" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamUsernames" name="teamUsernames" onfocus="usernameSearchOpen()"> 
-            <button type="submit" class=" bg-darker-500 rounded-full right-4">
+        <button type="submit" class=" bg-darker-500 rounded-full right-4">
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>
         </form>
         <!-- Popup for searching and adding usernames to a team -->
         <div class="bg-darker-500 mt-2 rounded-2xl w-130 h-50 hidden drop-shadow-outer inset-shadow-inner" id="searchPopup">
-            <p></p>
+            <form>
+                <input placeholder="Search usernames" type="text" id="usernameSearchBox">
+                <div id="searchResults"></div>
+                <button type="button" onclick="confirmMembers()" class="bg-lighter-500 mt-40 rounded-full w-120 h-8 drop-shadow-outer inset-shadow-inner">
+                    <p>Confirm Members</p>
+                </button>
+            </form>
         </div>
         <div class="w-full mt-5 p-4 text-2xl grid grid-cols-3">
             <p>Name</p>

@@ -39,6 +39,5 @@ include_once 'validation.php';
           <div id="message"></div>
     </div>
 </body>
-<script src="showPass.js"></script>
 <script src="loginForm.js"></script>
 </html>

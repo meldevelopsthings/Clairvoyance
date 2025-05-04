@@ -20,3 +20,12 @@ function loginEvent(event) {
         document.getElementById("message").innerHTML = "An error has occured, please try again.";
     });
 }
+
+function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  } 
