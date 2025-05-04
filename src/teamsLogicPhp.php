@@ -6,27 +6,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $teamName = $_POST["teamName"];
     $usernamesInvs = array_filter(explode(", ", $_POST["teamUsernames"]));
     
-    // OKAY SO NOW YOU NEED TO TAKE THESE USERNAMES, MATCH THEM WITH THEIR ID AND THEN USE THOSE IDS IN THE TEAM CREATION PROCESS BELOW
+    if (empty($teamName)) {
+        die("Team name is required.");
+    }
     
-    $stmt0 = $db->prepare("SELECT userID FROM userAccounts WHERE userID = :username");
-    $stmt0->bindValue(":username", $usernamesInvs, SQLITE3_TEXT);
-    $userIDs = $stmt0->execute();
-    
+    try {
+        $db->exec('BEGIN TRANSACTION');
 
+        $stmt = $db->prepare("INSERT INTO teams (teamName) VALUES (:teamName)");
+        $stmt->bindValue(":teamName", $teamName, SQLITE3_TEXT);
+        $stmt->execute();
 
-    $stmt = $db->prepare("INSERT INTO teams (teamName) VALUES (:teamName)");
-    $stmt->bindValue(":teamName", $teamName, SQLITE3_TEXT);
-    $result = $stmt->execute();
+        $teamID = $db->lastInsertRowID();
 
-    if ($teamName == "") {
-        echo 'Team name is required.';
-    } else {
-        if ($result) {
-            echo 'Team created successfully.';
-        } else {
-            echo 'Failed to create team. ' . $db->lastErrorMsg();
+        $userIDs = [];
+        $stmt = $db->prepare("SELECT userID FROM userAccounts WHERE username = :username");
+        
+        foreach ($usernamesInvs as $username) {
+            $stmt->bindValue(":username", $username, SQLITE3_TEXT);
+            $result = $stmt->execute();
+            $row = $result->fetchArray(SQLITE3_ASSOC);
+            
+            if ($row && isset($row["userID"])) {
+                $userIDs[] = (int)$row["userID"];
+            }
         }
+
+        $stmt2 = $db->prepare("INSERT INTO teamMemberAuth (userID, teamID) VALUES (:userID, :teamID)");
+
+        foreach ($userIDs as $userID) {
+            $stmt2->bindValue("userID", $userID, SQLITE3_INTEGER);
+            $stmt2->bindValue("teamID", $teamID, SQLITE3_INTEGER);
+            $stmt2->execute();
+            $stmt2->reset();
+        }
+
+        $db->exec('COMMIT');
+        echo 'Team created successfully with ' . count($userIDs) . ' members';
+    
+    } catch (Exception $e) {
+        $db->exec("ROLLBACK");
+        die('Error: ' . $e->getMessage());
     }
 }
-
 ?>
