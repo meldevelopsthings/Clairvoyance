@@ -10,7 +10,7 @@ function renderResults(users) {
     resultsDiv.innerHTML = users.map(user => {
         const isChecked = selectedUsers.some(u => u === user);
         return `
-            <label class="flex items-center p-2 hover:bg-lighter-500 rounded">
+            <label class="flex text-center p-2 hover:bg-lighter-500 rounded-full z-10 m-1 overflow-auto">
                 <input type="checkbox"
                     class="mr-2"
                     value="${user.replace(/"/g, '&quot;')}"
@@ -29,7 +29,6 @@ function handleUserSelection(username) {
     } else {
         selectedUsers.splice(index, 1);
     }
-    console.log("Current selected users:", selectedUsers);
 }
 
 function confirmMembers() {
@@ -40,22 +39,16 @@ function confirmMembers() {
     
     document.getElementById("usernameSearch").value = '';
     document.getElementById("searchResults").innerHTML = '';
-    
-    console.log("Final selected users:", selectedUsers);
 }
 
 document.getElementById("usernameSearchBox").addEventListener("input" ,async function(e) {
-   const searchTerm = e.target.value;
-   
-   try {
+    const searchTerm = e.target.value;
+    
     const response = await fetch(`searchUsers.php?term=${encodeURIComponent(searchTerm)}`);
     const users = await response.json();
 
     renderResults(users);
 
-   } catch (error) {
-    console.error("Erorr:", error);
-   }
 });
 
 function confirmMembers() {

@@ -78,18 +78,18 @@ while ($team = $result->fetchArray(SQLITE3_ASSOC)) {
         <h1 class="text-5xl">All Teams</h1>
         <form method="POST" class="w-full mt-10 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner">
             <input placeholder="Type name here" class="bg-lighter-500 rounded-full text-center placeholder-text-500" type="text" id="teamName" name="teamName">
-            <input placeholder="Click here to invite members" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamUsernames" name="teamUsernames" onfocus="usernameSearchOpen()"> 
+            <input placeholder="Type or search here to invite members" class="bg-lighter-500 rounded-full text-center placeholder-text-500" id="teamUsernames" name="teamUsernames" onfocus="usernameSearchOpen()"> 
         <button type="submit" class=" bg-darker-500 rounded-full right-4">
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>
         </form>
         <!-- Popup for searching and adding usernames to a team -->
-        <div class="bg-darker-500 mt-2 rounded-2xl w-130 h-50 hidden drop-shadow-outer inset-shadow-inner" id="searchPopup">
+        <div class="bg-darker-500 mt-2 rounded-2xl w-130 h-70 hidden drop-shadow-outer inset-shadow-inner" id="searchPopup">
             <form>
-                <input placeholder="Search usernames" type="text" id="usernameSearchBox">
-                <div id="searchResults"></div>
-                <button type="button" onclick="confirmMembers()" class="bg-lighter-500 mt-40 rounded-full w-120 h-8 drop-shadow-outer inset-shadow-inner">
+                <input placeholder="Search usernames" type="text" id="usernameSearchBox" class="bg-lighter-500 mt-4 rounded-full w-120 h-8 text-center placeholder-text-500">
+                <div id="searchResults" class=""></div>
+                <button type="button" onclick="confirmMembers()" class="bg-lighter-500 flex-grow mt-8 rounded-full w-120 h-8 z-50 relative">
                     <p>Confirm Members</p>
                 </button>
             </form>
