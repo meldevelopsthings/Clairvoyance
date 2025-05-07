@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @font-face {
     font-family: "Ubuntu";
     font-weight: 400;
@@ -21,4 +20,8 @@
 
 body {
     background-color: var(--color-lighter-500);
+}
+
+.draggableTask.dragging {
+    opacity: 0.25;
 }
