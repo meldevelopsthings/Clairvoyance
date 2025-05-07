@@ -23,9 +23,9 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
 <body class="text-text-500">
     <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500">
         <?php
-        echo '<p class="text-3xl">' . $_GET["boardName"] . '</p>';
+        echo '<p class="flex text-3xl w-fit border-r-3 border-border-500">' . $_GET["boardName"] . '</p>';
         ?>
-        <input type="button" value="x" class="fixed right-0 mr-4 top-4 text-6xl select-none" onclick="window.location.href = 'boards.php'">
+        <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
     </header>
     <div class="flex overflow-x-auto gap-4 mt-5 pb-3 pl-4"> 
     <?php
@@ -48,6 +48,10 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
                         echo '</div>';
                     }
                 }
+                echo '<form class="p-2 mb-2 bg-lighter-500 rounded-full">';
+                echo '<input placeholder="+" type="text" class="createTask text-center text-2xl placeholder-text-500 w-full focus:outline-0">';
+                echo '</form>';
+
                 echo '</div></div>';
             }
         } else {
