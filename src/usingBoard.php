@@ -23,15 +23,18 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
 <body class="text-text-500">
     <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500">
         <?php
-        echo '<p class="flex text-3xl w-fit border-r-3 border-border-500">' . $_GET["boardName"] . '</p>';
+        echo '<p class="inline-block text-3xl w-fit border-r-3 pr-2 border-border-500">' . $_GET["boardName"] . '</p>';
         ?>
+        <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
+        <input type="button" value="New Task" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
+        <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
         <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
     </header>
     <div class="flex overflow-x-auto gap-4 mt-5 pb-3 pl-4"> 
     <?php
         if ($lists) {
             foreach ($lists as $row) {
-                echo '<div class="draggableList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
+                echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'" onclick="window.location.href = \'boards.php\'">';
                 echo '<p class="text-center mb-4 text-3xl">' . $row["listName"] . '</p>';
 
                 $currentListID = $row["listID"];

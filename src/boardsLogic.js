@@ -1,15 +1,15 @@
 const tasks = document.querySelectorAll(".draggableTask");
-const lists = document.querySelectorAll(".draggableList");
+const lists = document.querySelectorAll(".taskList");
 
 
 tasks.forEach(task => {
     task.addEventListener("dragstart", () => {
         task.classList.add("dragging");  
-    })
+    });
 
     task.addEventListener("dragend", () => {
         task.classList.remove("dragging");  
-    })
+    });
 })
 
 lists.forEach(list => {
@@ -22,7 +22,7 @@ lists.forEach(list => {
         const xhttp = new XMLHttpRequest();
         xhttp.open("GET", "changeList.php?newListID="+list.id+"&taskID="+task.id);
         xhttp.send();
-    })
+    });
 })
 
 
