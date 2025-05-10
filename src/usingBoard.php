@@ -21,15 +21,23 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
     <title>board x</title>
 </head>
 <body class="text-text-500">
-    <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500">
+<!-- Toolbar for managing transactions between the database. This allows the user to create new lists/tasks and also to delete the board. -->
+    <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500 z-10">
         <?php
         echo '<p class="inline-block text-3xl w-fit border-r-3 pr-2 border-border-500">' . $_GET["boardName"] . '</p>';
         ?>
         <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
         <input type="button" value="New Task" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
-        <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
+        <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
         <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
     </header>
+    <div class="fixed hidden w-full h-full bg-lighter-500 z-20" id="deleteBoardWarning">
+        <div class="absolute text-center w-250 top-1/3 left-1/3">
+            <p class="text-4xl mb-10">You are about to delete this board, removing all lists and tasks inside of it, would you like to proceed?</p>
+            <input class="text-4xl bg-darker-500 rounded-full p-4 mr-20 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="Yes">
+            <input class="text-4xl bg-darker-500 rounded-full p-4 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="No" onclick="deleteWarningClose()">
+        </div>
+    </div>
     <div class="flex overflow-x-auto gap-4 mt-5 pb-3 pl-4"> 
     <?php
         if ($lists) {

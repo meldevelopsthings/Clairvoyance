@@ -82,7 +82,7 @@ while ($board = $result->fetchArray(SQLITE3_ASSOC)) {
                 <option value="todo">To-do</option>
                 <option value="code">Code</option>    
             </select>
-            <button type="submit" class=" bg-darker-500 rounded-full right-4">
+            <button type="submit" class="bg-darker-500 rounded-full right-4">
             <p class="inline-block text-nowrap align-middle mr-2">Create New</p>
             <img src="./img/new.svg" class="inline-block align-middle">
         </button>

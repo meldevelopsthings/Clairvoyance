@@ -25,4 +25,10 @@ lists.forEach(list => {
     });
 })
 
+function deleteWarningOpen() {
+    document.getElementById("deleteBoardWarning").style.display = 'block';
+}
 
+function deleteWarningClose() {
+    document.getElementById("deleteBoardWarning").style.display = 'none';
+}
