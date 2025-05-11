@@ -26,15 +26,16 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         <?php
         echo '<p class="inline-block text-3xl w-fit border-r-3 pr-2 border-border-500">' . $_GET["boardName"] . '</p>';
         ?>
-        <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
-        <input type="button" value="New Task" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500">
+        <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="newList()">
+        <input type="button" value="New Task" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="">
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
         <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
     </header>
+<!-- Popup warning for deleting the board -->
     <div class="fixed hidden w-full h-full bg-lighter-500 z-20" id="deleteBoardWarning">
         <div class="absolute text-center w-250 top-1/3 left-1/3">
             <p class="text-4xl mb-10">You are about to delete this board, removing all lists and tasks inside of it, would you like to proceed?</p>
-            <input class="text-4xl bg-darker-500 rounded-full p-4 mr-20 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="Yes">
+            <input class="text-4xl bg-darker-500 rounded-full p-4 mr-20 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="Yes" onclick="deleteBoard()">
             <input class="text-4xl bg-darker-500 rounded-full p-4 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="No" onclick="deleteWarningClose()">
         </div>
     </div>
@@ -42,8 +43,12 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
     <?php
         if ($lists) {
             foreach ($lists as $row) {
-                echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'" onclick="window.location.href = \'boards.php\'">';
-                echo '<p class="text-center mb-4 text-3xl">' . $row["listName"] . '</p>';
+                echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
+                echo '<form onsubmit="renameList()" method="GET" class="text-center mb-4">
+                        <input type="text" class="text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500" placeholder="' . $row["listName"] . '"name="listName"">
+                        <input type="submit" class="hidden">
+                        </form>';
+                echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="'.$row["listID"].'">';
 
                 $currentListID = $row["listID"];
                 $stmt = $db->prepare("SELECT * FROM tasks WHERE listID = :listID");
@@ -70,6 +75,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         }
         echo '</div>';
     ?>
+    <div id="message"></div>
 </body>
 <script src="boardsLogic.js"></script>
 </html>

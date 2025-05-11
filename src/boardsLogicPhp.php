@@ -6,7 +6,7 @@ $currentUserID = $_SESSION["userID"];
 // Initially, we run a method to create a new board with just the name and its creation date. Then, we grab the boardID that generates from SQL auto increment and the currently authenticated userID and insert both of those values into the boardAuth table, allowing the user to access that board.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $boardName = $_POST["boardName"];
-    $creationDate = date("Y-m-d H:i:s", $d);
+    $creationDate = date("Y-m-d H:i:s");
 
     $stmt = $db->prepare("INSERT INTO boards (boardName, creationDate) VALUES (:boardName, :creationDate)");
     $stmt->bindValue(":boardName", $boardName, SQLITE3_TEXT);
@@ -25,9 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->bindValue(":boardID", $creationID, SQLITE3_TEXT);
             $stmt->execute();
 
-            echo 'Board created successfully.';
-        } else {
-            echo 'Failed to create Board. ' . $db->lastErrorMsg();
         }
     }
 }
