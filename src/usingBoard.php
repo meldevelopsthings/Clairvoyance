@@ -27,7 +27,6 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         echo '<p class="inline-block text-3xl w-fit border-r-3 pr-2 border-border-500">' . $_GET["boardName"] . '</p>';
         ?>
         <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="newList()">
-        <input type="button" value="New Task" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="">
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
         <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
     </header>
@@ -45,11 +44,11 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
             foreach ($lists as $row) {
                 echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
                 echo '<form onsubmit="renameList()" method="GET" class="text-center mb-4">
-                        <input type="text" class="text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500" placeholder="' . $row["listName"] . '"name="listName"">
+                        <input type="text" class="text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500" placeholder="' . $row["listName"] . '"name="listName">
                         <input type="submit" class="hidden">
                         </form>';
                 echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="'.$row["listID"].'">';
-
+                
                 $currentListID = $row["listID"];
                 $stmt = $db->prepare("SELECT * FROM tasks WHERE listID = :listID");
                 $stmt->bindValue(":listID", $currentListID, SQLITE3_INTEGER);

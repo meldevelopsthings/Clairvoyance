@@ -80,7 +80,7 @@ function deleteList(listID) {
     xhttp.send();
 }
 
-/*function renameList() {
+function renameList() {
     const xhttp = new XMLHttpRequest();
     const urlInfo = new URLSearchParams(window.location.search);
     const listID = urlInfo.get("listID");
@@ -92,4 +92,4 @@ function deleteList(listID) {
     };
 
     xhttp.send();
-}*/
+}
