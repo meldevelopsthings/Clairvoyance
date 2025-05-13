@@ -1,5 +1,6 @@
 <?php
 $db = new SQLite3("database.db");
+
 $listID = intval($_GET["listID"]);
 $listName =$_GET["name"];
 

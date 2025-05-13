@@ -1,5 +1,6 @@
-const tasks = document.querySelectorAll(".draggableTask");
-const lists = document.querySelectorAll(".taskList");
+var tasks = document.querySelectorAll(".draggableTask");
+var lists = document.querySelectorAll(".taskList");
+var listID = 0;
 
 
 tasks.forEach(task => {
@@ -64,9 +65,18 @@ document.addEventListener("click", function(e) {
     const deleteButton = e.target.closest(".delButton");
 
     if (deleteButton) {
-        const listID = deleteButton.dataset.listId;
+        listID = deleteButton.dataset.listId;
         deleteList(listID);
     } 
+});
+
+//gets the list id that the user tries to update
+document.addEventListener("click", function(e) {
+    const listEdited = e.target.closest(".taskListText");
+
+    if (listEdited) {
+        listID = listEdited.dataset.listId;
+    }
 });
 
 function deleteList(listID) {
@@ -82,10 +92,8 @@ function deleteList(listID) {
 
 function renameList() {
     const xhttp = new XMLHttpRequest();
-    const urlInfo = new URLSearchParams(window.location.search);
-    const listID = urlInfo.get("listID");
-    const newName = urlInfo.get("listName");
-    xhttp.open("GET", "renameList.php?listID="+listID+"&name="+newName);
+    const newName = document.querySelector("input[name='listName']").value;
+    xhttp.open("GET", "renameList.php?listID="+encodeURIComponent(listID)+"&name="+encodeURIComponent(newName));
 
     xhttp.onload = function() {
         location.reload();

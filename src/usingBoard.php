@@ -19,6 +19,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./output.css" rel="stylesheet">
     <title>board x</title>
+    <script type="text/javascript" src="boardsLogic.js"></script>
 </head>
 <body class="text-text-500">
 <!-- Toolbar for managing transactions between the database. This allows the user to create new lists/tasks and also to delete the board. -->
@@ -43,10 +44,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         if ($lists) {
             foreach ($lists as $row) {
                 echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
-                echo '<form onsubmit="renameList()" method="GET" class="text-center mb-4">
-                        <input type="text" class="text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500" placeholder="' . $row["listName"] . '"name="listName">
-                        <input type="submit" class="hidden">
-                        </form>';
+                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList()" data-list-id="'.$row["listID"].'">';
                 echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="'.$row["listID"].'">';
                 
                 $currentListID = $row["listID"];
