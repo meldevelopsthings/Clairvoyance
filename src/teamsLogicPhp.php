@@ -1,6 +1,7 @@
 <?php
 session_start();
 $db = new SQLite3("database.db");
+$creationDate = date("Y-m-d H:i:s");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $teamName = $_POST["teamName"];
@@ -13,13 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $db->exec('BEGIN TRANSACTION');
 
-        $stmt = $db->prepare("INSERT INTO teams (teamName) VALUES (:teamName)");
+        $stmt = $db->prepare("INSERT INTO teams (teamName, creationDate) VALUES (:teamName, :creationDate)");
         $stmt->bindValue(":teamName", $teamName, SQLITE3_TEXT);
+        $stmt->bindValue(":creationDate", $creationDate, SQLITE3_TEXT);
         $stmt->execute();
 
         $teamID = $db->lastInsertRowID();
 
-        $userIDs = [];
+        $userIDs = [$_SESSION["userID"]];  
         $stmt = $db->prepare("SELECT userID FROM userAccounts WHERE username = :username");
         
         foreach ($usernamesInvs as $username) {
@@ -42,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $db->exec('COMMIT');
-        echo 'Team created successfully with ' . count($userIDs) . ' members';
     
     } catch (Exception $e) {
         $db->exec("ROLLBACK");

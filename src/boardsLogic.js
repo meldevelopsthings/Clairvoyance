@@ -2,7 +2,7 @@ var tasks = document.querySelectorAll(".draggableTask");
 var lists = document.querySelectorAll(".taskList");
 var listID = 0;
 
-
+// Makes it so that the backend can handle the dragging class as a kind of state, so this method toggles it on/off based on event listeners for when the drag process begins, and then ends.
 tasks.forEach(task => {
     task.addEventListener("dragstart", () => {
         task.classList.add("dragging");  
@@ -13,6 +13,7 @@ tasks.forEach(task => {
     });
 });
 
+// This method makes it so that, every list in the board acts as a container for the draggable tasks, so therefor when a draggable task is being dragged over and then dropped over a list, we append that task to the bottom, not including the create new task element.
 lists.forEach(list => {
     list.addEventListener("dragover", e => {
         e.preventDefault();
@@ -90,14 +91,56 @@ function deleteList(listID) {
     xhttp.send();
 }
 
-function renameList() {
+function renameList(element) {
     const xhttp = new XMLHttpRequest();
-    const newName = document.querySelector("input[name='listName']").value;
+    const listID = element.dataset.listId;
+    const newName = element.value;
     xhttp.open("GET", "renameList.php?listID="+encodeURIComponent(listID)+"&name="+encodeURIComponent(newName));
 
     xhttp.onload = function() {
+        element.placeholder = newName;
         location.reload();
     };
 
+    xhttp.send();
+}
+
+function createTask(element) {
+    const xhttp = new XMLHttpRequest();
+    const listID = element.dataset.listId;
+    const newTask = element.value;
+    xhttp.open("GET", "createTask.php?listID="+encodeURIComponent(listID)+"&name="+encodeURIComponent(newTask));
+
+    xhttp.onload = function() {
+        location.reload();
+        element.value = '';
+    };
+
+    xhttp.send();
+}
+
+function renameBoard(element) {
+    const xhttp = new XMLHttpRequest();
+    const newName = element.value;
+    const boardID = element.dataset.boardId;
+    xhttp.open("GET", "renameBoard.php?name="+encodeURIComponent(newName)+"&boardID="+encodeURIComponent(boardID));
+
+    xhttp.onload = function() {
+        element.placeholder = newName;
+        location.reload();
+    };
+
+    xhttp.send();
+}
+
+function closeBoard(element) {
+    const xhttp = new XMLHttpRequest();
+    const boardID = element.dataset.boardId;
+    xhttp.open("GET", "updateClose.php?boardID="+encodeURIComponent(boardID));
+
+    xhttp.onload = function() {
+        location.href = "boards.php";
+    };
+    
     xhttp.send();
 }

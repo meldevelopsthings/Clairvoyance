@@ -98,8 +98,9 @@ while ($board = $result->fetchArray(SQLITE3_ASSOC)) {
             if ($boards) {
                 foreach ($boards as $row) {
                     echo '<a href="usingBoard.php?boardID=' . $row["boardID"] . '&boardName='. $row["boardName"] .'">';
-                    echo '<div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-2 rounded-full drop-shadow-outer inset-shadow-inner" id="clickedBoard">';
+                    echo '<div class="w-full mt-5 p-4 bg-darker-500 grid grid-cols-3 rounded-full drop-shadow-outer inset-shadow-inner" id="clickedBoard">';
                     echo '<p>' . $row["boardName"] . '</p>';
+                    echo '<p>' . $row["closeDate"] . '</p>';
                     echo '<p>' . $row["creationDate"] . '</p>';
                     echo '</div>';
                     echo '</a>';

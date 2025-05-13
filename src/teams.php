@@ -94,9 +94,8 @@ while ($team = $result->fetchArray(SQLITE3_ASSOC)) {
                 </button>
             </form>
         </div>
-        <div class="w-full mt-5 p-4 text-2xl grid grid-cols-3">
+        <div class="w-full mt-5 p-4 text-2xl grid grid-cols-2">
             <p>Name</p>
-            <p>Last Closed</p>
             <p>Date Created</p>
         </div>
         <?php

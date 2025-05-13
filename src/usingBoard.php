@@ -25,11 +25,11 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
 <!-- Toolbar for managing transactions between the database. This allows the user to create new lists/tasks and also to delete the board. -->
     <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500 z-10">
         <?php
-        echo '<p class="inline-block text-3xl w-fit border-r-3 pr-2 border-border-500">' . $_GET["boardName"] . '</p>';
+        echo '<input type="text" placeholder="' . $_GET["boardName"] . '" class="inline-block text-3xl w-fit border-r-3 pr-2 placeholder-text-500 outline-0 border-border-500" onkeydown="if(event.key === `Enter`) renameBoard(this)" data-board-id="' . $_GET["boardID"] . '">';
         ?>
         <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="newList()">
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
-        <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="window.location.href = 'boards.php'">
+        <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="closeBoard(this)" data-board-id=<?= $_GET['boardID'] ?>>
     </header>
 <!-- Popup warning for deleting the board -->
     <div class="fixed hidden w-full h-full bg-lighter-500 z-20" id="deleteBoardWarning">
@@ -44,8 +44,8 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         if ($lists) {
             foreach ($lists as $row) {
                 echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
-                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList()" data-list-id="'.$row["listID"].'">';
-                echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="'.$row["listID"].'">';
+                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList(this)" data-list-id="' . $row["listID"] . '">';
+                echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="' . $row["listID"] . '">';
                 
                 $currentListID = $row["listID"];
                 $stmt = $db->prepare("SELECT * FROM tasks WHERE listID = :listID");
@@ -56,15 +56,12 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
                 echo '<div>';
                 while ($task = $resulttwo->fetchArray(SQLITE3_ASSOC)) {
                     if ($task) {
-                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full" id="task'.$task["taskID"].'">';
+                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full" id="task' . $task["taskID"] . '">';
                         echo $task["taskName"];
                         echo '</div>';
                     }
                 }
-                echo '<form class="p-2 mb-2 bg-lighter-500 rounded-full">';
-                echo '<input placeholder="+" type="text" class="createTask text-center text-2xl placeholder-text-500 w-full focus:outline-0">';
-                echo '</form>';
-
+                echo '<input placeholder="+" type="text" class="createTask p-2 mb-2 bg-lighter-500 rounded-full text-center text-2xl placeholder-text-500 w-full focus:outline-0" onkeydown="if(event.key === `Enter`) createTask(this)" data-list-id="' . $row["listID"] .'">';
                 echo '</div></div>';
             }
         } else {
