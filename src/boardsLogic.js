@@ -1,6 +1,7 @@
 var tasks = document.querySelectorAll(".draggableTask");
 var lists = document.querySelectorAll(".taskList");
 var listID = 0;
+var taskID = 0;
 
 // Makes it so that the backend can handle the dragging class as a kind of state, so this method toggles it on/off based on event listeners for when the drag process begins, and then ends.
 tasks.forEach(task => {
@@ -80,6 +81,16 @@ document.addEventListener("click", function(e) {
     }
 });
 
+//gets the task id that the user wants to edit in the menu
+document.addEventListener("click", function(e) {
+    const taskMenu = e.target.closest(".moreTask");
+
+    if (taskMenu) {
+        taskID = taskMenu.dataset.taskId;
+        openTaskMenu(taskID);
+    }
+});
+
 function deleteList(listID) {
     const xhttp = new XMLHttpRequest();
     xhttp.open("GET", "deleteList.php?listID="+listID);
@@ -126,8 +137,8 @@ function renameBoard(element) {
     xhttp.open("GET", "renameBoard.php?name="+encodeURIComponent(newName)+"&boardID="+encodeURIComponent(boardID));
 
     xhttp.onload = function() {
-        element.placeholder = newName;
         location.reload();
+        element.value = newName;
     };
 
     xhttp.send();
@@ -144,3 +155,60 @@ function closeBoard(element) {
     
     xhttp.send();
 }
+
+function openTaskMenu(element) {
+    document.getElementById("taskMenu").style.display = 'block';
+    document.getElementById("taskMenuHeading").innerText = element.dataset.taskName;
+    document.getElementById("taskDate").innerText = 'Created: ' + element.dataset.taskDate;
+    document.getElementById("taskDesc").innerText = 'Description: ' + element.dataset.taskDesc;
+    taskID = element.dataset.taskId
+}
+
+function closeTaskMenu() {
+    document.getElementById("taskMenu").style.display = 'none';
+}
+
+//lets user click anywhere outside of task menu to close
+document.getElementById("taskMenu").addEventListener("click", function(e) {
+    if(e.target === this) closeTaskMenu();
+});
+
+function deleteTask(taskID) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "deleteTask.php?taskID="+encodeURIComponent(taskID));
+
+        xhttp.onload = function() {
+            location.reload();
+        };
+        
+        xhttp.send();
+}
+
+document.getElementById("taskForm").addEventListener("submit", async (e, taskID) =>  {
+    e.preventDefault();
+
+    const formData = new FormData(document.getElementById("taskForm"));
+
+    try {
+        const response = await fetch("updateTask.php", {
+            method: 'POST',
+            body: JSON.stringify({
+                taskID: taskID,
+                taskName: formData.get("taskName"),
+                taskDesc: formData.get("taskDesc")
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            location.reload();
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error has occured, please try again.");
+    }
+});

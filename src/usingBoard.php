@@ -46,7 +46,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
 <!-- Toolbar for managing transactions between the database. This allows the user to create new lists/tasks and also to delete the board. -->
     <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500 z-10">
         <?php
-        echo '<input type="text" placeholder="' . $_GET["boardName"] . '" class="inline-block text-3xl w-fit border-r-3 pr-2 placeholder-text-500 outline-0 border-border-500 overflow-auto" onkeydown="if(event.key === `Enter`) renameBoard(this)" data-board-id="' . $_GET["boardID"] . '">';
+        echo '<input type="text" placeholder="' . $_GET["boardName"] . '" class="inline-block text-3xl w-fit border-r-3 pr-2 placeholder-text-500 outline-0 border-border-500 truncate whitespace-nowrap" onkeydown="if(event.key === `Enter`) renameBoard(this)" data-board-id="' . $_GET["boardID"] . '">';
         ?>
         <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="newList()">
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
@@ -65,7 +65,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         if ($lists) {
             foreach ($lists as $row) {
                 echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
-                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2 overflow-auto" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList(this)" data-list-id="' . $row["listID"] . '">';
+                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2 truncate whitespace-nowrap" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList(this)" data-list-id="' . $row["listID"] . '">';
                 echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="' . $row["listID"] . '">';
                 
                 $currentListID = $row["listID"];
@@ -77,9 +77,9 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
                 echo '<div>';
                 while ($task = $resulttwo->fetchArray(SQLITE3_ASSOC)) {
                     if ($task) {
-                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full overflow-ellipsis" id="task' . $task["taskID"] . '">';
-                        echo '<p class="inline-block">' . $task["taskName"] . '</p>';
-                        echo '<img src="./img/more.svg" class="delButton mr-3 inline-block" data-task-id="' . $task["taskID"] . '">';
+                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full flex items-center justify-between" id="task' . $task["taskID"] . '">';
+                        echo '<p class="ml-2 flex-1 truncate whitespace-nowrap min-w-0">' . $task["taskName"] . '</p>';
+                        echo '<img src="./img/more.svg" class="moreTask ml-2 shrink-0" data-task-id="' . $task["taskID"] . '" data-task-name="' . $task["taskName"] . '" data-task-desc="' . $task["description"] . '" data-task-date="' . $task["creationDate"] . '" onclick="openTaskMenu(this)">';
                         echo '</div>';
                     }
                 }
@@ -91,6 +91,25 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         }
         echo '</div>';
     ?>
+    <!-- Menu overlay for editing task information -->
+    <div class="fixed hidden inset-0 bg-stone-800/50 z-50" id="taskMenu">
+        <div class="fixed top-[calc(8rem+5%)] left-1/2 transform -translate-x-1/2 max-w-5xl w-full h-3/4 bg-darker-500 rounded-4xl drop-shadow-outer border-border-500 border-t-1 border-r-1 border-l-1">
+            <div class="text-center">
+                <div class="flex justify-between items-center relative">
+                    <img src="./img/trash.svg" class="delTaskButton p-8" onclick="deleteTask(taskID)">
+                    <p id="taskMenuHeading" class="text-4xl absolute left-1/2 transform -translate-x-1/2 mt-10"></p>
+                </div>
+                <p id="taskDesc" class="text-2xl"></p>
+                <p id="taskDate" class="text-2xl mb-20 mt-5"></p>
+                <button onclick="closeTaskMenu()" class="absolute top-4 right-6 text-6xl">×</button>
+            </div>
+            <form class="ml-10" id="taskForm">
+                <input type="text" placeholder="Task Name" name="taskName" class="bg-inner-500 rounded-full w-100 h-8 drop-shadow-outer insert-shadow-outer placeholder-text-500 mb-10 text-center"><br>
+                <input type="text" placeholder="Task Description" name="taskDesc" class="bg-inner-500 rounded-full w-100 h-8 drop-shadow-outer insert-shadow-outer placeholder-text-500 mb-10 text-center"><br>
+                <input type="submit" value="Confirm" class="text-2xl bg-darker-500 rounded-full p-4 mr-20 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500">
+            </form>
+        </div>
+    </div>
     <div id="message"></div>
 </body>
 <script src="boardsLogic.js"></script>
