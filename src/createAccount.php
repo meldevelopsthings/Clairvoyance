@@ -1,6 +1,5 @@
 <?php
 $db = new SQLite3("database.db");
-var_dump($_POST);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
@@ -13,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $db->prepare("INSERT INTO userAccounts (username, fname, password) VALUES (:username, :firstName, :password)");
     $stmt->bindValue(":username", $username, SQLITE3_TEXT);
     $stmt->bindValue(":firstName", $firstName, SQLITE3_TEXT);
-    $stmt->bindValue(":password", $password, SQLITE3_TEXT);
+    $stmt->bindValue(":password", md5($password), SQLITE3_TEXT);
     $result = $stmt->execute();
 
     echo 'Account created successfully! Try logging in!';

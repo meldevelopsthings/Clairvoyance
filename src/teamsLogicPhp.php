@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Team name is required.");
     }
     
+    // After retrieving teamname and user invites, begin transaction to create a new team and invite all usernames provided to the team.
     try {
         $db->exec('BEGIN TRANSACTION');
 

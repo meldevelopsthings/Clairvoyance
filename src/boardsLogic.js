@@ -161,7 +161,8 @@ function openTaskMenu(element) {
     document.getElementById("taskMenuHeading").innerText = element.dataset.taskName;
     document.getElementById("taskDate").innerText = 'Created: ' + element.dataset.taskDate;
     document.getElementById("taskDesc").innerText = 'Description: ' + element.dataset.taskDesc;
-    taskID = element.dataset.taskId
+
+    taskID = element.dataset.taskId;
 }
 
 function closeTaskMenu() {
@@ -184,7 +185,7 @@ function deleteTask(taskID) {
         xhttp.send();
 }
 
-document.getElementById("taskForm").addEventListener("submit", async (e, taskID) =>  {
+document.getElementById("taskForm").addEventListener("submit", async (e) =>  {
     e.preventDefault();
 
     const formData = new FormData(document.getElementById("taskForm"));

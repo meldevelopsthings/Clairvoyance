@@ -4,20 +4,13 @@ $db = new SQLite3("database.db");
 
 $currentUserID = $_SESSION["userID"];
 
-/* TO ADD: live view of user account info so they know what to change it from.
-$stmt = $db->prepare("SELECT fname FROM userAccounts WHERE userID = :userID");
-$stmt->bindValue(":userID", $currentUserID, SQLITE3_INTEGER);
-$result = $stmt->execute();
-$user = $result->fetchArray(SQLITE3_ASSOC);
-echo $user["fname"];
-*/
-
 // Code for retireiving form inputs and processing them through the database to run an update command.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['changeUsername'] ?? null;
     $password = $_POST['changePassword'] ?? null;
     $firstName = $_POST['changeFName'] ?? null;
-    $currentPassword = $_POST['confPassword'];
+    //typed current password, hashed
+    $currentPassword = md5($_POST['confPassword']);
 
     $stmt = $db->prepare("SELECT password FROM userAccounts WHERE userID = :userID");
     $stmt->bindValue(":userID", $currentUserID, SQLITE3_INTEGER);
@@ -45,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt->bindValue(":newUsername", $username, SQLITE3_TEXT);
             }
             if ($password) {
-                $stmt->bindValue(":newPassword", $password, SQLITE3_TEXT);
+                $stmt->bindValue(":newPassword", md5($password), SQLITE3_TEXT);
             }
             if ($firstName) {
                 $stmt->bindValue(":newFName", $firstName, SQLITE3_TEXT);

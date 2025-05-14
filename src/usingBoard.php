@@ -52,7 +52,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
         <input type="button" value="×" class="fixed right-0 mr-4 top-3 text-6xl select-none" onclick="closeBoard(this)" data-board-id=<?= $_GET['boardID'] ?>>
     </header>
-<!-- Popup warning for deleting the board -->
+<!-- Popup warning for deleting the board. -->
     <div class="fixed hidden w-full h-full bg-lighter-500 z-20" id="deleteBoardWarning">
         <div class="absolute text-center w-250 top-1/3 left-1/3">
             <p class="text-4xl mb-10">You are about to delete this board, removing all lists and tasks inside of it, would you like to proceed?</p>
@@ -60,6 +60,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
             <input class="text-4xl bg-darker-500 rounded-full p-4 drop-shadow-outer border-t-1 border-r-1 border-l-1 border-border-500" type="button" value="No" onclick="deleteWarningClose()">
         </div>
     </div>
+<!-- Display all lists and tasks belonging to a board. -->
     <div class="flex overflow-x-auto gap-4 mt-5 pb-3 pl-4"> 
     <?php
         if ($lists) {
@@ -91,7 +92,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         }
         echo '</div>';
     ?>
-    <!-- Menu overlay for editing task information -->
+    <!-- Menu overlay for editing task information. -->
     <div class="fixed hidden inset-0 bg-stone-800/50 z-50" id="taskMenu">
         <div class="fixed top-[calc(8rem+5%)] left-1/2 transform -translate-x-1/2 max-w-5xl w-full h-3/4 bg-darker-500 rounded-4xl drop-shadow-outer border-border-500 border-t-1 border-r-1 border-l-1">
             <div class="text-center">

@@ -1,9 +1,10 @@
 <?php
 try {
+    $input = json_decode(file_get_contents("php://input"), true);
     $db = new SQLite3("database.db");
-    $taskID = $_POST["taskID"];
-    $taskName = $_POST["taskName"];
-    $taskDesc = $_POST["taskDesc"];
+    $taskID = $input["taskID"];
+    $taskName = $input["taskName"];
+    $taskDesc = $input["taskDesc"];
     $updates = [];
     $values = [];
 
@@ -13,7 +14,7 @@ try {
     }
 
     if (!empty($taskDesc)) {
-        $updates[] = 'taskDesc = :desc';
+        $updates[] = 'description = :desc';
         $values[":desc"] = htmlspecialchars($taskDesc);
     }
 
