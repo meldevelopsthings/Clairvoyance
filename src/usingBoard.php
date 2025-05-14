@@ -1,8 +1,29 @@
 <?php
+session_start();
 $db = new SQLite3("database.db");
+$currentBoardID = $_GET["boardID"];
+
+// Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
+if (!$_SESSION["userID"]){
+    header("Location: index.php");
+    die();
+}
+
+$userID = $_SESSION["userID"];
+
+// Runs an additional check to ensure that the user is authenticated to the board they are trying to access: this prevents a user from entering the url of a board to bypass the menu.
+$stmt = $db->prepare("SELECT * FROM boardAuth WHERE userID = :userID AND boardID = :boardID");
+$stmt->bindValue(":userID", $userID, SQLITE3_INTEGER);
+$stmt->bindValue(":boardID", $currentBoardID, SQLITE3_INTEGER);
+$result = $stmt->execute();
+$result->fetchArray(SQLITE3_ASSOC);
+
+if (!$result) {
+    header("Location: boards.php");
+}
+
 
  // Gets all lists belonging to the currently in use board
-$currentBoardID = $_GET["boardID"];
 $stmt = $db->prepare("SELECT * FROM lists WHERE boardID = :boardID");
 $stmt->bindValue(":boardID", $currentBoardID, SQLITE3_TEXT);
 $result = $stmt->execute();
@@ -25,7 +46,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
 <!-- Toolbar for managing transactions between the database. This allows the user to create new lists/tasks and also to delete the board. -->
     <header class="bg-darker-500 w-full p-8 border-b-3 border-border-500 z-10">
         <?php
-        echo '<input type="text" placeholder="' . $_GET["boardName"] . '" class="inline-block text-3xl w-fit border-r-3 pr-2 placeholder-text-500 outline-0 border-border-500" onkeydown="if(event.key === `Enter`) renameBoard(this)" data-board-id="' . $_GET["boardID"] . '">';
+        echo '<input type="text" placeholder="' . $_GET["boardName"] . '" class="inline-block text-3xl w-fit border-r-3 pr-2 placeholder-text-500 outline-0 border-border-500 overflow-auto" onkeydown="if(event.key === `Enter`) renameBoard(this)" data-board-id="' . $_GET["boardID"] . '">';
         ?>
         <input type="button" value="New List" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="newList()">
         <input type="button" value="Delete Board" class="inline-block text-xl w-fit border-r-3 pl-1 pr-2 border-border-500" onclick="deleteWarningOpen()">
@@ -44,7 +65,7 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
         if ($lists) {
             foreach ($lists as $row) {
                 echo '<div class="taskList w-1/5 p-4 bg-darker-500 rounded-lg drop-shadow-outer inset-shadow-inner" id="list'.$row["listID"].'">';
-                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList(this)" data-list-id="' . $row["listID"] . '">';
+                echo '<input type="text" class="taskListText text-3xl form-control bg-transparent outline-0 text-center placeholder-text-500 mb-2 overflow-auto" placeholder="' . $row["listName"] . '"name="listName"  onkeydown="if(event.key === `Enter`) renameList(this)" data-list-id="' . $row["listID"] . '">';
                 echo '<img src="./img/trash.svg" class="delButton mr-3 fixed top-0 right-0 mt-3" data-list-id="' . $row["listID"] . '">';
                 
                 $currentListID = $row["listID"];
@@ -56,8 +77,9 @@ while ($list = $result->fetchArray(SQLITE3_ASSOC)) {
                 echo '<div>';
                 while ($task = $resulttwo->fetchArray(SQLITE3_ASSOC)) {
                     if ($task) {
-                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full" id="task' . $task["taskID"] . '">';
-                        echo $task["taskName"];
+                        echo '<div draggable="true" class="draggableTask p-2 mb-2 bg-lighter-500 rounded-full overflow-ellipsis" id="task' . $task["taskID"] . '">';
+                        echo '<p class="inline-block">' . $task["taskName"] . '</p>';
+                        echo '<img src="./img/more.svg" class="delButton mr-3 inline-block" data-task-id="' . $task["taskID"] . '">';
                         echo '</div>';
                     }
                 }
