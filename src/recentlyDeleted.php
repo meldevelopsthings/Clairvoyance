@@ -1,5 +1,11 @@
 <?php
-include_once 'validation.php';
+include_once 'menuRetrieve.php';
+
+// Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
+if (!$_SESSION["userID"]){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +23,7 @@ include_once 'validation.php';
 <!-- Sidebar code, allows user to navigate the site -->
         <nav id="navbar" class="text-text-500 text-xl bg-darker-500 list-none m-0 p-0 navclose:w-1/5 w-full h-screen fixed overflow-auto border-r-3 border-border-500 flex flex-col transition-transform duration-700 navclose:translate-x-0 -translate-x-full">
         <div class="flex-grow">
-        <a href="user-settings.php">
+        <a href="userSettings.php">
             <li class="flex items-center p-2 border-b-3 border-border-500">
                 <img src="./img/avatar.svg" class="mr-2">
                 <p class="text-nowrap">User</p>
@@ -35,13 +41,13 @@ include_once 'validation.php';
                 <p class="text-nowrap">All Teams</p>
             </li>
         </a>
-        <a href="recently-closed.php">
+        <a href="recentlyClosed.php">
             <li class="flex items-center p-2">
                 <img src="./img/recent.svg" class="mr-2">
                 <p class="text-nowrap">Recently Closed</p>
             </li>
         </a>
-        <a href="recently-deleted.php">
+        <a href="recentlyDeleted.php">
             <li class="flex items-center p-2">
                 <img src="./img/trash.svg" class="mr-2">
                 <p class="text-nowrap">Recently Deleted</p>

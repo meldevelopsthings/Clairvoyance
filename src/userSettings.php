@@ -1,5 +1,11 @@
 <?php
-include_once 'validation.php';
+include_once 'userSettingsLogic.php';
+
+// Runs a check that makes it so users must have a valid session at every instance of the application to prevent mishandling
+if (!$_SESSION["userID"]){
+    header("Location: index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +23,7 @@ include_once 'validation.php';
 <!-- Sidebar code, allows user to navigate the site -->
         <nav id="navbar" class="text-text-500 text-xl bg-darker-500 list-none m-0 p-0 navclose:w-1/5 w-full h-screen fixed overflow-auto border-r-3 border-border-500 flex flex-col transition-transform duration-700 navclose:translate-x-0 -translate-x-full">
         <div class="flex-grow">
-        <a href="user-settings.php">
+        <a href="userSettings.php">
             <li class="flex items-center p-2 border-b-3 border-border-500">
                 <img src="./img/avatar.svg" class="mr-2">
                 <p class="text-nowrap">User</p>
@@ -35,13 +41,13 @@ include_once 'validation.php';
                 <p class="text-nowrap">All Teams</p>
             </li>
         </a>
-        <a href="recently-closed.php">
+        <a href="recentlyClosed.php">
             <li class="flex items-center p-2">
                 <img src="./img/recent.svg" class="mr-2">
                 <p class="text-nowrap">Recently Closed</p>
             </li>
         </a>
-        <a href="recently-deleted.php">
+        <a href="recentlyDeleted.php">
             <li class="flex items-center p-2">
                 <img src="./img/trash.svg" class="mr-2">
                 <p class="text-nowrap">Recently Deleted</p>
@@ -57,9 +63,37 @@ include_once 'validation.php';
         </nav>    
     </div>
     <!-- Main Content, should display settings that user can edit (main options ((for now)) should include editing username, editing password, editing fname and deleting their account) -->
-    <main class="navclose:pl-[22%] text-center p-8">
-        <h1 class="text-text-500 text-5xl">User Settings</h1>
+    <main class="navclose:pl-[22%] text-text-500 text-center p-8">
+        <h1 class="text-5xl">User Settings</h1>
+        <form method="POST" class="my-10">
+        <label class="flex text-xl">Change Username:</label>
+        <input class="flex bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" id="changeUsername" name="changeUsername"><br>
+        <label class="flex text-xl">Change Password:</label>
+        <input class="flex bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" id="changePassword" name="changePassword"><br>
+        <label class="flex text-xl">Change First Name:</label>
+        <input class="flex bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" id="changeFName" name="changeFName"><br>
+        <div class="my-20">
+        <label class="flex text-xl">Confirm Current Password:</label>
+        <input class="flex bg-inner-500 rounded-full w-100 h-8 text-center drop-shadow-outer insert-shadow-outer" id="confPassword" name="confPassword" required>
+        <input class="flex my-5 w-fit px-4 h-12 text-2xl font-bold bg-inner-500 rounded-full drop-shadow-outer insert-shadow-outer" type="submit" id="confChangesButton" name="confChangesButton" value="Confirm Changes"><br>
+        </div>
+        </form>
+        <input class="flex my-5 w-fit px-4 h-12 text-2xl font-bold bg-inner-500 rounded-full drop-shadow-outer insert-shadow-outer" type="button" value="DELETE ACCOUNT" onclick="deleteAccount()">
     </main>
 </body>
 <script src="navbar.js"></script>
+<script>
+    function deleteAccount() {
+        if (confirm("This action will delete your account, would you like to continue?")) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", "deleteUser.php", true);
+
+            xhttp.onload = function() {
+                location.href = 'index.php';
+            };
+        
+            xhttp.send();
+        }
+    }
+</script>
 </html>

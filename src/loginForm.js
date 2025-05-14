@@ -17,6 +17,15 @@ function loginEvent(event) {
     })
     .catch(error => {
         console.error("Error:", error);
-        document.getElementById("message").innerHTML = "An error has occured, please try again.";
+        document.getElementById("message").innerHTML = 'An error has occured, please try again.';
     });
 }
+
+function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = 'text';
+    } else {
+      x.type = 'password';
+    }
+  } 

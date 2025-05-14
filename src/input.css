@@ -21,3 +21,7 @@
 body {
     background-color: var(--color-lighter-500);
 }
+
+.draggableTask.dragging {
+    opacity: 0.25;
+}
